@@ -72,7 +72,10 @@ bar <- foo;
 foo <- 2+2; foo
 foo <- 5*2; foo
 foo <- log(2); foo
+foo <- exp(100); foo
 log(foo)
+bar <- 5*5; bar
+whatisthis(bar);
 #' Character strings. Create these by wrapping single (`'`) or double (`"`)
 #' quotes around the value.
 
