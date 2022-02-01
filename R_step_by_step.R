@@ -76,15 +76,40 @@ foo <- exp(100); foo
 log(foo)
 bar <- 5*5; bar
 whatisthis(bar);
+print(foo <- 42)
+print (shoo <-67)
+log(((foo*3)+(shoo+2)*sqrt(144)+exp(10)))
 #' Character strings. Create these by wrapping single (`'`) or double (`"`)
 #' quotes around the value.
 
 #+ assignment_string
-
+a <- "Donot panic"
+print(a)
+coo <- "Donot panic"; coo
+a <- "Donot panic"; a
+b <- 'Donot panic'; b
+c <- "Don't panic"; c
+d <- 'The "Heart of Gold" comes equipped with heated leather seats and an infinite improbability drive'; d
+print (d)
+e <- 42; e
+e <- "42"; e
 #' Logical values are `TRUE` or `FALSE`. Can also be created using `>`, `<`,
 #' `==`, `!=`, `>=`, `<=`
 
 #+ assignment_logical
+foo > 25     ;#' assign variable foo
+shoo >100    ;#' assign variable shoo 
+foo >= 40    ; #' using operator  
+foo != 42    ; #' using NOT operator 
+foo == 42    ; #' using EQUAL operator 
+shoo == 42   ; #' using operator 
+foo <50 & shoo<100 ; #' using 'AND' operator
+foo<50 | shoo>100; #' using OR operator
+foo<50 | shoo<50
+foo>50 | shoo<50
+! foo>50
+!(shoo>50);  #' using NOT operator
+! foo>50 & shoo>50
 
 #' Missing values are represented by `NA` (no quotes for any of these). Null
 #' values are _not_ the same as missing and they are represented by `NULL`. In
@@ -95,7 +120,16 @@ whatisthis(bar);
 #' functions or converted from a character string using `as.Date()`.
 
 #+ assignment_datetime
-
+Sys.Date()
+Sys.time()
+?as.Date
+my_date <- "2022-01-31"; #' create example date
+print (my_date)       ; #' print my_date variable
+class (my_date)       ; #' check class of the variable
+new_date <- as.Date(my_date) ; #' convert character string
+new_date                      ; #' print new_date 
+class(new_date)               ;#' check class of new_date
+as.Date(new_date, tryFormats = c("%y-%m-%d"))
 #' Factors are basically integers that have labels. They are a human-readable
 #' alternative to using integer codes for discrete data. These will make more
 #' sense after we talk about vectors in the next section.
