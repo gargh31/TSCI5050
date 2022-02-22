@@ -12,6 +12,11 @@
 #' number_sections: false
 #' keep_md: true
 #' fig_caption: true
+#' output:
+#'  html_document:
+#'    toc: true
+#'    toc_float: true
+#'    code_folding: show
 #' ---
 #'
 #+ init, echo=FALSE, message=FALSE, warning=FALSE
@@ -186,10 +191,10 @@ c(baz,foo,"76")
 #' You can assign names to some or all members of a vector when you create it.
 #' You can also assign or re-assign names later using the `names()` function.
 
-#+ vectors_names1
+#+ vectors_names1, error=TRUE
 jar <- c(a="cat", best="dog", c= "fish", slow="tutle")
 print(jar)
-jar[best]
+# jar[best]
 jar["best"]
 jar[c("best","c")]
 #' You can also use it to see the currently assigned names.
@@ -264,7 +269,51 @@ quantile(bat, na.rm=TRUE)
 #' small datasets) `plot()`.
 
 #+ df_explore
+dim(iris)
+nrow(iris)
+ncol(iris)
+names(iris)
+head(iris)
+tail(iris)
+head(iris,10)
+#' how to select rows
+#+ df_subset
+iris[3:20,]
+iris[c(2:10,34,40:50,34,34,34),]
+iris[-c(3:20),]
+seq_len(nrow(iris))
+sample(seq_len(nrow(iris)), 10)  # sample without replacement
+sample(seq_len(nrow(iris)), 10, replace= TRUE) # sample with replacement
+iris0 <- iris[sample(seq_len(nrow(iris)), 10),]
+
+#' How to select coulmns in dataset
+#+ df_columns, error=TRUE, results="hide" 
+iris[,1:3] # columns miss 4 and 5
+iris[,c("Petal.Length","Petal.Width","Species")]
+prevar <- c("Petal.Length","Petal.Width","Species")  # define columns together
+iris[,prevar]
 
 
 
+iris$Species # picks the column from dataset by adding $sign
+outcome <- "Species"
+iris$outcome
+iris[[outcome]]
+iris [["Species"]]
+
+#' how to select columns and rows at same time
+#+ df_columnsrows
+iris[4:10,prevar]
+#' ## comments
+#'
+#' `#` This is an ordinary comment.Everything after it on the same line is not
+#' executed.
+#'
+#' `#'` This indicates that this line should be formatted as text. It must be
+#' the first two characters in that line in order to work.
+#'
+#' `#+` This indicates that the following lines (until the next #' or #+) should
+#' be treated as a "code chunk". I.e. the next lines (but not this one) will be
+#' run, the code will be displayed according to your settings and the results
+#' will be displayed according to your settings.
 
