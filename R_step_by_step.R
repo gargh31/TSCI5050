@@ -150,19 +150,23 @@ as.Date(new_date, tryFormats = c("%y-%m-%d"))
 #' same type.
 
 #+ vectors_c
-
+print(foo <- c(56,78,34,97,2,86))
+print(baz <- c(34,23,94,3,12,53))
 #' Since the default data structure in R is a `vector`, if you
 #' create some sort of simple value you are creating a `vector` even if you are
 #' not using `c()`... it just happens to be a `vector` of length 1. These
 #' are identical, and both return `1` when used with the `length()` function.
 
 #+ vectors_length1
-
+length(foo)
 #' If you want to create a sequence of consecutive integers, you can use the `:`
 #' operator.
 
 #+ vectors_sequence
-
+25:76
+65:38
+-32:12
+seq_len(12)
 #' In most other languages, you need to use a `for` loop in order to perform
 #' some sort of change to a series of values. In R, you often don't have to
 #' when you are working with vectors because a lot of functions (including all
@@ -171,22 +175,38 @@ as.Date(new_date, tryFormats = c("%y-%m-%d"))
 #' want all of them to be either the same length or length 1.
 
 #+ vectors_operators
-
+foo+6
+foo+baz
+foo>=34
+baz<=23
+bob <- baz<=23
+c(baz,foo)
+c(baz,foo,"76")
+# These work with all arithmetic operators
 #' You can assign names to some or all members of a vector when you create it.
 #' You can also assign or re-assign names later using the `names()` function.
 
 #+ vectors_names1
-
+jar <- c(a="cat", best="dog", c= "fish", slow="tutle")
+print(jar)
+jar[best]
+jar["best"]
+jar[c("best","c")]
 #' You can also use it to see the currently assigned names.
 
 #+ vectors_names2
-
+names(jar) <- c("libby", "beau", "bob", "bob2") # renaming
+print(jar)
+names(jar)
+names(jar)[3]
+names(jar)[3] <- "milo" # renames only one element
+jar
 #' You can subset a vector by using `[...]` with the `...` replaced by _another_
 #' vector, of integers indicating which positions you want to extract. Or you
 #' could use a vector of names.
 
 #+ vectors_subset1
-
+foo[3]
 #' If you just need a single value, use a single name or number.
 
 #+ vectors_subset2
@@ -196,16 +216,38 @@ as.Date(new_date, tryFormats = c("%y-%m-%d"))
 #' expressions separated by commas `,`.
 
 #+ vectors_subset3
-
+foo[c(1,2,3)]
+foo[1:3]
+foo[c(1:3,5:6)]
+baz
+bob
+baz[bob] # pulled the vector less than equal to 23
+print(foo)
+summary(foo)
+table(foo)
+table(jar) # frequency table
+bat <- sample(1:10, 30, replace = TRUE)
+table(bat)
+bat <- sample(1:10, 30, replace = TRUE)*1000
+table(bat)
+bat
+head(bat) # top 6 elements
+tail(bat) # last 6 elements
+diff(bat) # difference between two values
+sum(bat) # sums all values
+seq_along(bat) # sequence all values
+sum(bat, na.rm= TRUE) # for missing values
 #' Other useful functions for exploring vectors: `length()`, `summary()`,
 #' `table()`, `head()`, `tail()`, `sum()`, `diff()`, `seq_along()`.
 
 #+ vectors_explore
 
+
 #' Here are some aggregation functions. For these, make sure to use `na.rm=T` if
 #' your vector has `NA`s in it... `max()`, `min()`, `mean()`, `median()`,
 #' `quantile()`.
-
+quantile(bat) # tells quantiles
+quantile(bat, na.rm=TRUE)
 #+ vectors_aggregate
 
 #' ### Data Frames
