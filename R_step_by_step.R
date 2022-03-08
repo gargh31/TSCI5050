@@ -26,11 +26,13 @@
 debug <- 0;
 knitr::opts_chunk$set(echo=debug>-1, warning=debug>0, message=debug>0);
 library(ggplot2); # visualisation
-library(dplyr); # data processing
+
+
 library(GGally);
 library(rio);# simple command for importing and exporting
 library(pander); # format tables
 library(printr); # set limit on number of lines printed
+library(broom); # allows to give clean dataset
 options(max.print=42);
 panderOptions('table.split.table',Inf); panderOptions('table.split.cells',Inf);
 whatisthis <- function(xx){
@@ -306,6 +308,28 @@ iris [["Species"]]
 iris[4:10,prevar]
 #' ## comments
 #'
+#' ## Linear model
+#+ linear_models
+
+example(lm) # a sample for linear model
+View(mtcars) # view dataset
+perf <- lm(mpg~hp+wt+qset,mtcars)
+summary(perf) # gives detail summary
+summary(perf)$coeff # gives coefficient column
+glance(perf) #gives brief
+tidy(perf) # gives tidy cleaner version inside
+lm(mpg~hp+wt+vs,mtcars) %>% tidy() %>% select(c("estimate","p.value"))
+perf %>% tidy() %>% select(c("estimate","p.value"))
+perf %>% tidy() %>% select(c("estimate","p.value")) %>% slice(-1) # removes top row
+perf %>% tidy() %>% select(c("estimate","p.value")) %>% slice((1:3)) # gives 1 to 3 rows
+perf %>% tidy() %>% select(c("estimate","p.value")) %>% slice(-(1:3)) # removes 1 to 3 rwos
+whatisthis(perf) # gives class of the variable
+View(perf) # view inside of object
+
+#' ## multiple comparison
+perf %>% tidy() %>% select(c("p.value")) %>% slice(-1)
+perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% p.adjust()
+perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% unlist() %>% p.adjust()
 #' `#` This is an ordinary comment.Everything after it on the same line is not
 #' executed.
 #'
