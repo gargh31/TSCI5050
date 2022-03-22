@@ -314,33 +314,37 @@ iris[4:10,prevar]
 #+ linear_models
 
 example(lm) # a sample for linear model
-View(mtcars) # view dataset
-perf <- lm(mpg~hp+wt+qset,mtcars)
+
+perf <- lm(mpg~hp+wt+qsec,mtcars)
 summary(perf) # gives detail summary
 summary(perf)$coeff # gives coefficient column
 glance(perf) #gives brief
 tidy(perf) # gives tidy cleaner version inside
 lm(mpg~hp+wt+vs,mtcars) %>% tidy() %>% select(c("estimate","p.value"))
+#+ Debugging
 perf %>% tidy() %>% select(c("estimate","p.value"))
 perf %>% tidy() %>% select(c("estimate","p.value")) %>% slice(-1) # removes top row
 perf %>% tidy() %>% select(c("estimate","p.value")) %>% slice((1:3)) # gives 1 to 3 rows
 perf %>% tidy() %>% select(c("estimate","p.value")) %>% slice(-(1:3)) # removes 1 to 3 rwos
 whatisthis(perf) # gives class of the variable
-View(perf) # view inside of object
 
-#' ## multiple comparison
+#' View(perf) # view inside of object
+
+#+ ## multiple comparison
 perf %>% tidy() %>% select(c("p.value")) %>% slice(-1)
-perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% p.adjust()
+#'perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% p.adjust()
 perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% unlist() %>% p.adjust()
 #' `#` This is an ordinary comment.Everything after it on the same line is not
 #' executed.
 #' 
 #' ## Working with datasets and DPLYR
+#+ Working with datasets and DPLYR
+
 r"(/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset)" %>% gsub("////","/",.) # to replace anything in the address
 list.files("/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset") # to see anyfiles in the folder
 
 dtset <- list.files("/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset", full.names = TRUE) %>% sapply(import) %>% setNames(.,basename(names(.))) # to change the base names 
-Example1<- dtset
+Example1 <- dtset
 example2 <- Example1$Birthweight.sav
 
 #' Define location of your files 
