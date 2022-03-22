@@ -25,14 +25,15 @@
 # because we are using regular comments instead of #' comments
 debug <- 0;
 knitr::opts_chunk$set(echo=debug>-1, warning=debug>0, message=debug>0);
+
 library(ggplot2); # visualisation
-
-
 library(GGally);
 library(rio);# simple command for importing and exporting
 library(pander); # format tables
 library(printr); # set limit on number of lines printed
 library(broom); # allows to give clean dataset
+library(dplyr); #add dplyr library
+
 options(max.print=42);
 panderOptions('table.split.table',Inf); panderOptions('table.split.cells',Inf);
 whatisthis <- function(xx){
@@ -284,6 +285,7 @@ iris[3:20,]
 iris[c(2:10,34,40:50,34,34,34),]
 iris[-c(3:20),]
 seq_len(nrow(iris))
+
 sample(seq_len(nrow(iris)), 10)  # sample without replacement
 sample(seq_len(nrow(iris)), 10, replace= TRUE) # sample with replacement
 iris0 <- iris[sample(seq_len(nrow(iris)), 10),]
@@ -332,7 +334,18 @@ perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% p.adjust()
 perf %>% tidy() %>% select(c("p.value")) %>% slice(-1) %>% unlist() %>% p.adjust()
 #' `#` This is an ordinary comment.Everything after it on the same line is not
 #' executed.
-#'
+#' 
+#' ## Working with datasets and DPLYR
+r"(/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset)" %>% gsub("////","/",.) # to replace anything in the address
+list.files("/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset") # to see anyfiles in the folder
+
+dtset <- list.files("/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset", full.names = TRUE) %>% sapply(import) %>% setNames(.,basename(names(.))) # to change the base names 
+Example1<- dtset
+example2 <- Example1$Birthweight.sav
+
+#' Define location of your files 
+#' 
+#' sample
 #' `#'` This indicates that this line should be formatted as text. It must be
 #' the first two characters in that line in order to work.
 #'
