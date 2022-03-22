@@ -340,7 +340,7 @@ r"(/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset)" %>% gsub("/
 list.files("/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset") # to see anyfiles in the folder
 
 dtset <- list.files("/Users/harshitgarg/Desktop/projects/tsci/TSCI 5050 self/dataset", full.names = TRUE) %>% sapply(import) %>% setNames(.,basename(names(.))) # to change the base names 
-Example1<- dtset
+Example1 <- dtset
 example2 <- Example1$Birthweight.sav
 
 #' Define location of your files 
