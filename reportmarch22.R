@@ -368,7 +368,7 @@ mutate(birthweight, AGEMonths = AGE*12, AGEdays= AGEMonths*30.25,
 
 summary(birthweight$BWT)
 
-#' # THE SUMMARY FUNCTION
+#' # THE SUMMARISE FUNCTION
 #' 
 summary(birthweight$BWT) # gives summary of the particular column min/max, median, quartiles
 summary(birthweight) # gives summary of all columns min/max, median, quartiles
@@ -383,6 +383,11 @@ group_by(birthweight,SMOKE) %>% summarise(across(where(is.numeric),sd))
 
 group_by(birthweight,SMOKE) %>% summarise(across(where(is.numeric),mean, .names = '{.col}_mean'), 
                                           across(where(is.numeric),sd, .names = '{.col}_sd'))  # gives mean and SD
+
+group_by(birthweight,SMOKE) %>% summarise(across(where(is.numeric),list(mean,sd))) # gives list of mean and SD of each column but doesnt tell the names
+group_by(birthweight,SMOKE) %>% summarise(across(where(is.numeric),list(Mn=mean,StD=sd,Md=median,InQR=IQR))) # gives list of mean and SD and also its names
+group_by(birthweight,SMOKE) %>% summarise(across(where(is.numeric),list(Mn=mean,StD=sd,Md=median,InQR=IQR))) %>% View # gives all the list and view it
+group_by(birthweight,SMOKE) %>% mutate(across(where(is.numeric),list(Mn=mean,StD=sd,Md=median,InQR=IQR))) %>% View # gives new columns of aggregate function for each group
 
 #Define location of your files 
 #' 
